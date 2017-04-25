@@ -10,9 +10,9 @@ class Node(object):
     _next = None
 
     def __init__(self, elem, next=None):
-        self._elem = elem
+        self.elem = elem
         if next:
-            self._next = next
+            self.next = next
 
     def __str__(self):
         str = 'Node({0}) >'.format(self.elem)

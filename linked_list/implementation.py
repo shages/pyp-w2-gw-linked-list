@@ -63,7 +63,7 @@ class LinkedList(AbstractLinkedList):
 
     def append(self, elem):
         new_node = Node(elem)
-        self._length += 1
+        self.length += 1
         if self._end:
             self._end.next = new_node
             self._end = new_node
@@ -73,7 +73,7 @@ class LinkedList(AbstractLinkedList):
             self._curr = new_node
 
     def count(self):
-        return self._length
+        return self.length
 
     def pop(self, index=None):
         if index is None:
@@ -93,8 +93,11 @@ class LinkedList(AbstractLinkedList):
                 self._start = None
                 self._end = None
 
-            self._length -= 1
+            self.length -= 1
             return last.elem
+
+        if index > len(self) - 1:
+            raise IndexError
 
         # we have an index
         c = 0
@@ -111,15 +114,7 @@ class LinkedList(AbstractLinkedList):
             prev = item
             c += 1
 
-        if c == len(self):
-            # not found
-            raise IndexError
-
-        if item is None:
-            # null value - empty list
-            raise IndexError
-
-        self._length -= 1
+        self.length -= 1
         return item.elem
 
     @property
@@ -133,6 +128,10 @@ class LinkedList(AbstractLinkedList):
     @property
     def length(self):
         return self._length
+
+    @length.setter
+    def length(self, val):
+        self._length = val
 
 class LinkedListIterator(object):
     _start = None
